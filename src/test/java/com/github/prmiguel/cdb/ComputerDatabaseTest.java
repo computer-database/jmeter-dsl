@@ -16,17 +16,18 @@ public class ComputerDatabaseTest {
                 httpDefaults().url("http://computer-database.gatling.io").path("/computers"),
                 threadGroup().rampTo(20, Duration.ofMillis(30000)).holdIterating(1)
                         .children(
+
                                 Computers.list(),
                                 Computers.search("macbook"),
                                 Computers.open("6"),
-                                Computers.list(),
+                                Computers.home(),
                                 Computers.page("1"),
                                 Computers.page("2"),
                                 Computers.page("3"),
                                 Computers.openNewForm(),
                                 Computers.create("Alienware", "2022-12-12", "2023-12-12", "5"),
-                                Computers.list(),
-                                jtlWriter("target/jmeter/results", "basic.jtl").saveAsXml(true)
+                                jtlWriter("target/jmeter/results", "basic.jtl").saveAsXml(true),
+                                htmlReporter("target/jmeter/results", "report")
                         )
         ).run();
     }

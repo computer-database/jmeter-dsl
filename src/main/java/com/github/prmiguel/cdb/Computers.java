@@ -7,20 +7,24 @@ import static us.abstracta.jmeter.javadsl.JmeterDsl.httpSampler;
 public class Computers {
 
     public static DslHttpSampler list() {
-        return httpSampler((String) null);
+        return httpSampler("A user arrives at the application", (String) null);
     }
 
     public static DslHttpSampler search(String computerName) {
-        return httpSampler((String) null)
+        return httpSampler("The user searches for", (String) null)
                 .param("f", computerName);
     }
 
     public static DslHttpSampler open(String computerId) {
-        return httpSampler("/computers/" + computerId);
+        return httpSampler("The user opens one of the related models", "/computers/" + computerId);
+    }
+
+    public static DslHttpSampler home() {
+        return httpSampler("The user goes back to home page", (String) null);
     }
 
     public static DslHttpSampler page(String page) {
-        return httpSampler("/computers")
+        return httpSampler("The user iterates through page " + page, "/computers")
                 .param("p", page)
                 .param("n", "10")
                 .param("s", "name")
@@ -28,11 +32,11 @@ public class Computers {
     }
 
     public static DslHttpSampler openNewForm() {
-        return httpSampler("/computers/new");
+        return httpSampler("The user opens the new model form", "/computers/new");
     }
 
     public static DslHttpSampler create(String name, String introduced, String discontinued, String company) {
-        return httpSampler("/computers")
+        return httpSampler("The user creates a new model", "/computers")
                 .method("POST")
                 .param("name", name)
                 .param("introduced", introduced)
